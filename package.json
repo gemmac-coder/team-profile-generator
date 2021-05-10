@@ -4,7 +4,9 @@
   "description": "## Description",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "test": "jest --verbose --coverage",
+    "test:watch": "jest --watch --verbose"
   },
   "repository": {
     "type": "git",
