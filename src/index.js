@@ -100,6 +100,20 @@ const employeeQuestions = [
   },
 ];
 
+const Engineer = {
+  name: "",
+  id: "",
+  email: "",
+  github: "",
+};
+
+const Intern = {
+  name: "",
+  id: "",
+  email: "",
+  school: "",
+};
+
 const init = async () => {
   const managerAnswers = await inquirer.prompt(managerQuestions);
   const employeeAnswers = await inquirer.prompt(employeeQuestions);
