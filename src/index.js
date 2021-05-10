@@ -6,6 +6,38 @@ const generateHTML = require("./utils/generateHTML.js");
 
 const employees = [];
 
+class Employee {
+  constructor(name) {
+    this.employeeName = name;
+  }
+  constructor(id) {
+    this.employeeID = id;
+  }
+  constructor(email) {
+    this.employeeEmail = email;
+  }
+}
+
+class Engineer extends Employee {
+  constructor(github) {
+    super(employeeAnswers, github);
+    this.engineerGithub = github;
+  }
+}
+
+class Intern extends Employee {
+  constructor(github) {
+    super(employeeAnswers, school);
+    this.internSchoolName = school;
+  }
+}
+
+if (employeeAnswers.employeeRole === "Engineer") {
+  askEngineerForGithub();
+} else if (employeeAnswers.employeeRole === "Intern") {
+  askInternForSchool();
+}
+
 const validateInput = (userInput) => {
   if (userInput === "") {
     return "please type your answer before proceeding";
@@ -70,9 +102,10 @@ const employeeQuestions = [
 
 const init = async () => {
   const managerAnswers = await inquirer.prompt(managerQuestions);
+  const employeeAnswers = await inquirer.prompt(employeeQuestions);
   // The manager answers as pushed into the employees array
-  employees.push(managerAnswers);
-  console.log(managerAnswers);
+  employees.push(managerAnswers, employeeAnswers);
+  console.log(managerAnswers, employeeAnswers);
   console.log(employees);
 };
 
