@@ -1,57 +1,15 @@
 const inquirer = require("inquirer");
-const jest = require("jest");
+
 const fs = require("fs");
 
 const generateHTML = require("./utils/generateHTML.js");
 const Manager = require("./lib/manager.js");
+const Engineer = require("./lib/engineer.js");
+const Intern = require("./lib/intern.js");
 
 const employees = [];
 
-const getEmployeeType = async (managerAnswers) => {
-  // if statement if (managerAnswers.addEmployee === true ) { then ask this question below
-  if (managerAnswers.addEmployee === "Yes") {
-    const roleQuestion = [
-      {
-        type: "list",
-        message: "Please select your role?",
-        name: "employeeTitle",
-        choices: [
-          { name: "Manager", value: "manager", short: "engineer" },
-          { name: "Engineer", value: "engineer", short: "engineer" },
-          { name: "Intern", value: "intern", short: "intern" },
-          { name: "None", value: "none", short: "none" }, // only when there is 2 employees in the employees array, i.e. a manager + 1
-        ],
-      },
-    ];
-
-    const roleAnswer = await inquirer.prompt(roleQuestion);
-    getAllEmployees(roleAnswer);
-    return roleAnswer;
-  } else {
-    return false;
-  }
-};
-
-const getAllEmployees = (getEmployeeType) => {
-  const employees = [];
-  // first set a variable equal to employee type, in the loop check employee type, if it's engineer ask y question
-  // while loop: first part, inprogress (set to true), first if will check to see if in progress is true,
-  //  if it's true you will check employee type - i.e. the managerAnswers.employeeType, inside
-  const inprogress = true;
-  while (inprogress) {
-    if (getEmployeeType.employeeTitle === "intern") {
-      createIntern();
-    }
-    if (getEmployeeType.employeeTitle === "engineer") {
-      createEngineer();
-    } else {
-      inprogress = false;
-    }
-  }
-  // From  the manager answers about the role, the corresponding employee types will be created
-  // The manager answers as pushed into the employees array
-  employees.push(managerAnswers);
-};
+let isTeamComplete = false;
 
 const validateInput = (userInput) => {
   if (userInput === "") {
@@ -61,117 +19,100 @@ const validateInput = (userInput) => {
   }
 };
 
-const managerQuestions = [
-  {
-    type: "input",
-    message: "Enter manager name:",
-    name: "name",
-    validate: validateInput,
-  },
-  {
-    type: "input",
-    message: "Enter employee ID:",
-    name: "id",
-    validate: validateInput,
-  },
-  {
-    type: "input",
-    message: "Enter your office number:",
-    name: "officeNumber",
-    validate: validateInput,
-  },
-  {
-    type: "input",
-    message: "Enter work email:",
-    name: "email",
-    validate: validateInput,
-  },
-  // {
-  //   type: "list",
-  //   message: "Would like you to add any employees?",
-  //   name: "addEmployee",
-  //   choices: ["Yes", "No"],
-  // },
-];
-
-const engineerQuestions = [
-  {
-    type: "input",
-    message: "What is your name?",
-    name: "engineerName",
-    validate: validateInput,
-  },
-  {
-    type: "input",
-    message: "What is your engineer ID?",
-    name: "engineerID",
-    validate: validateInput,
-  },
-  {
-    type: "input",
-    message: "What is your work email?",
-    name: "engineerEmail",
-    validate: validateInput,
-  },
-  {
-    type: "input",
-    message: "What is your github profile?",
-    name: "employerGitHub",
-    validate: validateInput,
-  },
-  {
-    type: "input",
-    message: "What is your school name?",
-    name: "employerOfficeNumber",
-    validate: validateInput,
-  },
-];
-
-const internQuestions = [
-  {
-    type: "input",
-    message: "What is your name?",
-    name: "internName",
-    validate: validateInput,
-  },
-  {
-    type: "input",
-    message: "What is your work email?",
-    name: "internEmail",
-    validate: validateInput,
-  },
-  {
-    type: "input",
-    message: "What is your intern ID?",
-    name: "internID",
-    validate: validateInput,
-  },
-  {
-    type: "input",
-    message: "What is your school name?",
-    name: "internOfficeNumber",
-    validate: validateInput,
-  },
-];
-
 // init function will generate html, write to file
 const init = async () => {
   await createManager();
-  // x will either be the while loop further up or if manager hasn't selected to add anyone else then it will just generate a h1 saying "no more employees added";
-  // const x = getEmployeeType(managerAnswers);
+
+  while (!isTeamComplete) {
+    const employeeTypeQuestion = [
+      {
+        type: "list",
+        message: "Please select the employee type you wish to add:",
+        name: "employeeType",
+        choices: [
+          { name: "Engineer", value: "engineer", short: "Engineer" },
+          { name: "Intern", value: "intern", short: "Intern" },
+          { name: "None", value: "none", short: "None" }, // only when there is 2 employees in the employees array, i.e. a manager + 1
+        ],
+      },
+    ];
+    const { employeeType } = await inquirer.prompt(employeeTypeQuestion);
+    if (employeeType === "none") {
+      isTeamComplete = true;
+      console.log(employees);
+      // generateHTML();
+    } else {
+      if (employeeType === "engineer") {
+        await createEngineer();
+      }
+      if (employeeType === "intern") {
+        await createIntern();
+      }
+    }
+  }
 };
 
 const createManager = async () => {
+  const managerQuestions = [
+    {
+      type: "input",
+      message: "Enter manager name:",
+      name: "name",
+      validate: validateInput,
+    },
+    {
+      type: "input",
+      message: "Enter employee ID:",
+      name: "id",
+      validate: validateInput,
+    },
+    {
+      type: "input",
+      message: "Enter your office number:",
+      name: "officeNumber",
+      validate: validateInput,
+    },
+    {
+      type: "input",
+      message: "Enter work email:",
+      name: "email",
+      validate: validateInput,
+    },
+  ];
   const managerAnswers = await inquirer.prompt(managerQuestions);
   // The engineer answers as pushed into the employees array
-  console.log(managerAnswers);
   // this one is the right one to pass in for each engineer, manager etc.
   const manager = new Manager(managerAnswers);
   employees.push(manager);
-  console.log(employees);
 };
 
 const createEngineer = async () => {
+  const engineerQuestions = [
+    {
+      type: "input",
+      message: "Please enter engineer name:",
+      name: "name",
+      validate: validateInput,
+    },
+    {
+      type: "input",
+      message: "Please enter engineer ID:",
+      name: "id",
+      validate: validateInput,
+    },
+    {
+      type: "input",
+      message: "Please enter engineer email:",
+      name: "email",
+      validate: validateInput,
+    },
+    {
+      type: "input",
+      message: "Please enter engineer github profile:",
+      name: "github",
+      validate: validateInput,
+    },
+  ];
   const engineerAnswers = await inquirer.prompt(engineerQuestions);
   // The engineer answers as pushed into the employees array
   console.log(engineerAnswers);
@@ -182,6 +123,32 @@ const createEngineer = async () => {
 
 // create intern question array
 const createIntern = async () => {
+  const internQuestions = [
+    {
+      type: "input",
+      message: "Enter intern name:",
+      name: "name",
+      validate: validateInput,
+    },
+    {
+      type: "input",
+      message: "Enter intern email:",
+      name: "email",
+      validate: validateInput,
+    },
+    {
+      type: "input",
+      message: "Enter intern ID:",
+      name: "id",
+      validate: validateInput,
+    },
+    {
+      type: "input",
+      message: "Enter intern school name:",
+      name: "school",
+      validate: validateInput,
+    },
+  ];
   const internAnswers = await inquirer.prompt(internQuestions);
   // The intern answers as pushed into the employees array
   console.log(internAnswers);
