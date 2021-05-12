@@ -42,9 +42,9 @@ const renderManager = (manager) => {
   return template;
 };
 
-// render engineer function - as above but with engineer methods passed in
+// to do: render engineer function - as above but with engineer methods passed in
 
-//  & intern
+// to do:  render engineer function - as above but with intern methods passed in
 
 const renderFullMarkdown = (HTML) => {
   let template = fs.readFileSync(
