@@ -61,23 +61,26 @@ class Employee {
 }
 
 class Manager extends Employee {
-  constructor({ name, email, managerID }) {
+  constructor({ name, email, managerID, officeNumber }) {
     super(name, email, managerID);
     this.officeNumber = officeNumber;
+    this.role = "Manager";
   }
 }
 
 class Engineer extends Employee {
   constructor({ name, email, github }) {
-    super(name, email, github);
+    super(name, email, employeeID, github);
     this.engineerGithub = github;
+    this.role = "Engineer";
   }
 }
-// this is the right way to do the constructor function
+
 class Intern extends Employee {
   constructor({ name, email, school }) {
-    super(name, email, school);
+    super(name, email, school, employeeID);
     this.internSchoolName = school;
+    this.role = "Intern";
   }
 }
 
