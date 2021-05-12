@@ -40,7 +40,6 @@ const init = async () => {
     if (employeeType === "none") {
       isTeamComplete = true;
       console.log(employees);
-      // generateHTML();
     } else {
       if (employeeType === "engineer") {
         await createEngineer();
@@ -50,6 +49,14 @@ const init = async () => {
       }
     }
   }
+  const HTML = generateHTML(employees);
+  fs.writeFileSync("team-profile.html", HTML, (err) => {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log("HTML file created");
+    }
+  });
 };
 
 const createManager = async () => {
