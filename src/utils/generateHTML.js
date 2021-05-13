@@ -42,9 +42,35 @@ const renderManager = (manager) => {
   return template;
 };
 
-// to do: render engineer function - as above but with engineer methods passed in
+// render engineer function - as above but with engineer methods passed in
+const renderEngineer = (engineer) => {
+  let template = fs.readFileSync(
+    path.resolve(templatesDir, "engineer.html"),
+    "utf8"
+  );
+  //changes placeholders in engineer.html file with actual values from the instance of the  engineer's class in the employees array
+  template = replaceTemplates(template, "name", engineer.getName());
+  template = replaceTemplates(template, "id", engineer.getId());
+  template = replaceTemplates(template, "role", engineer.getRole());
+  template = replaceTemplates(template, "email", engineer.getEmail());
+  template = replaceTemplates(template, "github", manager.getGithub());
+  return template;
+};
 
 // to do:  render engineer function - as above but with intern methods passed in
+const renderIntern = (intern) => {
+  let template = fs.readFileSync(
+    path.resolve(templatesDir, "intern.html"),
+    "utf8"
+  );
+  //changes placeholders in engineer.html file with actual values from the instance of the  engineer's class in the employees array
+  template = replaceTemplates(template, "name", intern.getName());
+  template = replaceTemplates(template, "id", intern.getId());
+  template = replaceTemplates(template, "role", intern.getRole());
+  template = replaceTemplates(template, "email", intern.getEmail());
+  template = replaceTemplates(template, "school", intern.getSchool());
+  return template;
+};
 
 const renderFullMarkdown = (HTML) => {
   let template = fs.readFileSync(
