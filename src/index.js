@@ -139,14 +139,14 @@ const createIntern = async () => {
     },
     {
       type: "input",
-      message: "Enter intern email:",
-      name: "email",
+      message: "Enter intern ID:",
+      name: "id",
       validate: validateInput,
     },
     {
       type: "input",
-      message: "Enter intern ID:",
-      name: "id",
+      message: "Enter intern email:",
+      name: "email",
       validate: validateInput,
     },
     {
