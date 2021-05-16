@@ -12,7 +12,7 @@ describe("Engineer", () => {
       const engineer = new Engineer(mockEngineer);
       expect(engineer).toBeInstanceOf(Engineer);
     });
-    test("should construct a new instance of an engineer class with name, id, email and office number", () => {
+    test("should construct a new instance of an engineer class with name, id, email and github profile", () => {
       const engineer = new Engineer(mockEngineer);
       expect(engineer).toEqual({
         name: "Ella",

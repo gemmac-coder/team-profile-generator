@@ -38,7 +38,7 @@ describe("Intern", () => {
       const intern = new Intern(mockIntern);
       expect(intern.getEmail()).toEqual("sam@codeworks.co.uk");
     });
-    test("should return github profile URL when the getGithub method is called", () => {
+    test("should return school when the getSchool method is called", () => {
       const intern = new Intern(mockIntern);
       expect(intern.getSchool()).toEqual("University of Liverpool");
     });

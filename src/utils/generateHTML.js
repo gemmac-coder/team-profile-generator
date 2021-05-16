@@ -9,10 +9,10 @@ const templatesDir = path.resolve(__dirname, "../templates");
 
 // Generate html function takes in the employee array
 const generateHTML = (employees) => {
-  // Html is equal to an empty array
+  // Html is declared as an empty array
   const HTML = [];
 
-  // The objects in the employees array will be filtered by role and the corresponding function will used to create an employee of that type.
+  // The objects in the employees array are filtered by role using the filter method, and, using the map method, the corresponding function is used to create an employee of that type.
   // All of these objects are then pushed into the HTML array
   HTML.push(
     employees
@@ -30,9 +30,7 @@ const generateHTML = (employees) => {
       .map((intern) => renderIntern(intern))
   );
 
-  // console.log(HTML, "generateHTML.js");
-
-  // The object in the html array are then joined and passed into the render full markdown function
+  // The objects in the html array are then joined and passed into the render full markdown function
   return renderFullMarkdown(HTML.join(""));
 };
 
@@ -103,13 +101,13 @@ const renderFullMarkdown = (HTML) => {
   return replaceTemplates(template, "team", HTML);
 };
 
-// The replace templates function takes in in the template, placeholder and value
+// The replace templates function takes in the template, placeholder and value
 const replaceTemplates = (template, placeholder, value) => {
-  // The pattern are the values between the double curly braces
+  // The pattern is the values between the double curly braces
   const pattern = new RegExp(`{{${placeholder}}}`, "gm");
-  // The replace method will replace anything  between the double curly brace placeholders with the actual user-inputted values
+  // The replace method will replace all placeholders between the double curly braces with the actual user-inputted values
   return template.replace(pattern, value);
 };
 
-// Generate html is exported, so it can be accessed by the index.js file
+// Generate html file is exported, so it can be accessed by the index.js file
 module.exports = generateHTML;

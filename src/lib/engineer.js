@@ -14,11 +14,11 @@ class Engineer extends Employee {
     // Defines the role as engineer
     this.role = "Engineer";
   }
-  // Get github method on engineer returns the user-inputted github profile URL
+  // Get github method on engineer returns the user-inputted github profile URL for this instance of the engineer class
   getGithub() {
     return this.github;
   }
-  // Get role returns the engineer role from this instance of the engineer class
+  // Get role returns the engineer role for this instance of the engineer class
   getRole() {
     return this.role;
   }

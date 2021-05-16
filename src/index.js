@@ -1,7 +1,7 @@
 // Inquirer is imported to ask questions to the user to generate the team profile
 const inquirer = require("inquirer");
 
-// Fs is required to write the file and generate the html markdown
+// Fs is required to write the team profile file
 const fs = require("fs");
 
 // Generate html is required to create the markdown
@@ -153,7 +153,7 @@ const createEngineer = async () => {
     },
   ];
 
-  // The engineer answers will be generated from the engineer's input to the questions
+  // The engineer answers will be generated from the manager's input to the questions
   const engineerAnswers = await inquirer.prompt(engineerQuestions);
   // The new instance of the engineer class takes in the answers
   const engineer = new Engineer(engineerAnswers);

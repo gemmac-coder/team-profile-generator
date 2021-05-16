@@ -3,7 +3,7 @@ const Employee = require("./employee");
 
 // The manager class extends the parent employee class
 class Manager extends Employee {
-  // Constructor function takes in name, email, id and school name
+  // Constructor function takes in name, email, id and office number
   constructor({ name, email, id, officeNumber }) {
     // Inherited properties from the parent employee class are name, email and id
     super({ name, email, id });
