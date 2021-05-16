@@ -22,3 +22,5 @@ From the manager's input, a dynamic team profile markdown is generated.
 MIT License
 
 ## Link to Video
+
+https://youtu.be/31LhQkLcZvE
