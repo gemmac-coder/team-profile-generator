@@ -10,6 +10,14 @@ The application creates an employee class, which is extended to create specific 
 
 From the manager's input, a dynamic team profile markdown is generated.
 
+## Technologies Used:
+
+- JavaScript
+- Node.js
+- Node Inquirer
+- Jest Inquirer (for testing)
+- FS
+
 ## Installation
 
 - Firstly, fork and clone this Github repo.
