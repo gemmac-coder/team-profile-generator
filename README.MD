@@ -29,6 +29,14 @@ From the manager's input, a dynamic team profile markdown is generated.
 
 MIT License
 
+## Screenshot of application:
+
+![Screenshot showcasing generated HTML markdown for team profile](assets/screenshots/generated-html-team-profile.png)
+
 ## Link to Video
 
 https://youtu.be/31LhQkLcZvE
+
+## Contact Information:
+
+For further information on this application, please email me at gemmacollinge_71@hotmail.com
